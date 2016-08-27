@@ -9,11 +9,16 @@ import seedu.addressbook.data.exception.IllegalValueException;
 public class Address {
 
     public static final String EXAMPLE = "123, some street";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses needs to "
+    		+ "be entered in the following order: BLOCK, STREET, UNIT, POSTAL_CODE";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
-    public final String value;
     private boolean isPrivate;
+    
+    private final Block block;
+    private final Street street;
+    private final Unit unit;
+    private final PostalCode postalCode;
 
     /**
      * Validates given address.
@@ -25,7 +30,13 @@ public class Address {
         if (!isValidAddress(address)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        this.value = address;
+        
+        String[] addressComponents = address.split(", ");
+        this.block = new Block(addressComponents[0]);
+        this.street = new Street(addressComponents[1]);
+        this.unit = new Unit(addressComponents[2]);
+        this.postalCode = new PostalCode(addressComponents[3]);
+        
     }
 
     /**
@@ -34,22 +45,27 @@ public class Address {
     public static boolean isValidAddress(String test) {
         return test.matches(ADDRESS_VALIDATION_REGEX);
     }
+    
+    public String getFullAddress(){
+    	 return block.getBlock() + ", " + street.getStreet() + ", " + unit.getUnit() + ", "
+         		+ postalCode.getPostalCode();
+    }
 
     @Override
     public String toString() {
-        return value;
+        return getFullAddress();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                && this.getFullAddress().equals(((Address) other).getFullAddress())); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return getFullAddress().hashCode();
     }
 
     public boolean isPrivate() {
