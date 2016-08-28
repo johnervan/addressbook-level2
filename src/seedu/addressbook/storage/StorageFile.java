@@ -2,6 +2,7 @@ package seedu.addressbook.storage;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.exception.StorageFileNotFoundException;
 import seedu.addressbook.storage.jaxb.AdaptedAddressBook;
 
 import javax.xml.bind.JAXBContext;
@@ -9,6 +10,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -143,6 +145,18 @@ public class StorageFile {
 
     public String getPath() {
         return path.toString();
+    }
+    
+    /**
+     * Checks if the storage file exists 
+     * 
+     * @throws StorageFileNotFoundException if the storage file does not exist
+     */
+    
+    public void checkIfFileExists() throws StorageFileNotFoundException {
+    	if (!Files.exists(path)) {
+    		throw new StorageFileNotFoundException("Error: Storage file is missing.");
+    	}
     }
 
 }
