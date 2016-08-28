@@ -8,6 +8,7 @@ import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.ui.TextUi;
+import seedu.addressbook.data.exception.StorageFileNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -81,6 +82,12 @@ public class Main {
         do {
             String userCommandText = ui.getUserCommand();
             command = new Parser().parseCommand(userCommandText);
+            try {
+        		storage.checkIfFileExists();
+        	} catch (StorageFileNotFoundException sfnf) {
+        		ui.showToUser(sfnf.getMessage());
+        		exit();
+        	}
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);
