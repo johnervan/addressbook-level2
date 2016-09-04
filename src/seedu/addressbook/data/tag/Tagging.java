@@ -17,17 +17,25 @@ public class Tagging {
 	
 	private Person person;
 	private Tag tag;
-	private String change;
+	private Boolean isAdded;
 	
-	public Tagging(String change, Person person, Tag tag){
-		this.change = change;
+	public Tagging(Boolean isAdded, Person person, Tag tag){
+		this.isAdded = isAdded;
 		this.person = person;
 		this.tag = tag;
 	}
 	
+	private String getChange(){
+		if(isAdded){
+			return ADDED;
+		} else {
+			return DELETED;
+		}
+	}
+	
 	@Override
 	public String toString() {
-        return change + " " + person.getName() + " " + tag.toString();
+        return getChange() + " " + person.getName() + " " + tag.toString();
     }
 	
 
