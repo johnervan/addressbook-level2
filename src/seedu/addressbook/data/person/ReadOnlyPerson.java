@@ -82,4 +82,6 @@ public interface ReadOnlyPerson {
         }
         return builder.toString();
     }
+    
+    public String getPrintableString(Printable...printables);
 }
