@@ -15,7 +15,7 @@ import seedu.addressbook.data.person.Name;
  * @author Johnervan
  * Tests the isSimilar method in the Name class
  */
-public class NameIsSimilarTest {	
+public class NameTest {	
 	
 	private Name thisName;
 	
