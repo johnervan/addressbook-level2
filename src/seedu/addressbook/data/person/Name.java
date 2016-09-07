@@ -54,10 +54,13 @@ public class Name {
     	    		
     	if(other == null){
     		return false;
-    	} else if(other.toString().equals(fullName)){
+    	} 
+    	
+    	if(other.toString().toUpperCase().equals(fullName.toUpperCase())){
     		return true;
-    	} else
-    		return true;
+    	} 
+    	
+    	return false;
     }
 
     @Override

@@ -22,16 +22,23 @@ public class NameIsSimilarTest {
 	}
 	
 	@Test
-	public void nullInput_returnsFalse() throws IllegalValueException {	
+	public void isSimilar_nullInputReturnsFalse() throws IllegalValueException {	
 		Name thisName = new Name("John K Smith");
 		Name otherName = null;
 		assertFalse(thisName.isSimilar(otherName));
 	}
 	
-
-	public void equalNames_returnsTrue() throws IllegalValueException {
+	@Test
+	public void isSimilar_equalNamesReturnsTrue() throws IllegalValueException {
 	    Name thisName = new Name("John K Smith");
 		Name otherName = new Name("John K Smith");
+		assertTrue(thisName.isSimilar(otherName));
+	}
+	
+	@Test
+	public void isSimilar_diffCaseReturnsTrue() throws IllegalValueException {
+		Name thisName = new Name("John K Smith");
+		Name otherName = new Name("john k SMITH");
 		assertTrue(thisName.isSimilar(otherName));
 	}
 	
