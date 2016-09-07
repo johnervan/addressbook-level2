@@ -2,6 +2,7 @@ package seedu.addressbook.data.person;
 
 import seedu.addressbook.data.exception.IllegalValueException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,8 +47,10 @@ public class Name {
     
     /**
      * Returns true if the 'other name' is similar to 'this name'
-     * Two names are considered to be similar if the 'other name' is a subset of 'this' name
-     * or if both names are equal, even if the the cases are different (i.e. upper case and lower case)
+     * Two names are considered to be similar if
+     * (1) The 'other name' is a subset of 'this' name
+     * (2) if both names are equal, even if the the cases are different (i.e. upper case and lower case)
+     * Note: This method is case-insensitive and order-insensitive
      * @param other
      */
     public Boolean isSimilar(Name other){
@@ -56,9 +59,12 @@ public class Name {
     		return false;
     	} 
     	
-    	if(other.toString().toUpperCase().equals(fullName.toUpperCase())){
+    	ArrayList<String> thisNameSet = new ArrayList<String>(Arrays.asList(fullName.toUpperCase().split(" ")));
+    	ArrayList<String> otherNameSet = new ArrayList<String>(Arrays.asList(other.toString().toUpperCase().split(" ")));
+    	
+    	if(thisNameSet.containsAll(otherNameSet)){
     		return true;
-    	} 
+    	}
     	
     	return false;
     }
