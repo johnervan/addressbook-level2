@@ -51,11 +51,13 @@ public class Name {
      * @param other
      */
     public Boolean isSimilar(Name other){
+    	    		
     	if(other == null){
     		return false;
-    	} else {
+    	} else if(other.toString().equals(fullName)){
     		return true;
-    	}
+    	} else
+    		return true;
     }
 
     @Override

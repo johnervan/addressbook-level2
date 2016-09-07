@@ -16,11 +16,23 @@ import seedu.addressbook.data.person.Name;
  */
 public class NameIsSimilarTest {	
 	
+
+	public void initialiseThisName() throws IllegalValueException{
+		
+	}
+	
 	@Test
 	public void nullInput_returnsFalse() throws IllegalValueException {	
 		Name thisName = new Name("John K Smith");
 		Name otherName = null;
 		assertFalse(thisName.isSimilar(otherName));
 	}
+	
 
+	public void equalNames_returnsTrue() throws IllegalValueException {
+	    Name thisName = new Name("John K Smith");
+		Name otherName = new Name("John K Smith");
+		assertTrue(thisName.isSimilar(otherName));
+	}
+	
 }
