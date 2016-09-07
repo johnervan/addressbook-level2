@@ -56,8 +56,9 @@ public class NameIsSimilarTest {
 	
 	@Test
 	public void isSimilar_superSetReturnsFalse() throws IllegalValueException {
-		Name otherName = new Name("John K EXTRA Smith");
-		assertFalse(thisName.isSimilar(otherName));
+		Name testName = new Name("JOHN");
+		Name otherName = new Name("JOHNathan");
+		assertFalse(testName.isSimilar(otherName));
 	}
 	
 	@Test
@@ -66,6 +67,10 @@ public class NameIsSimilarTest {
 		assertFalse(thisName.isSimilar(otherName));
 	}
 	
-
+	@Test
+	public void isSimilar_nameContainingSubSetReturnsTrue() throws IllegalValueException {
+		Name otherName = new Name("Alan M Smith");
+		assertTrue(thisName.isSimilar(otherName));
+	}
 	
 }

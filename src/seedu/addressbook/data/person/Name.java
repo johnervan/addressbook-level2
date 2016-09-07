@@ -48,7 +48,7 @@ public class Name {
     /**
      * Returns true if the 'other name' is similar to 'this name'
      * Two names are considered to be similar if
-     * (1) The 'other name' is a subset of 'this' name
+     * (1) The 'other name' contains elements that are a subset of 'this' name
      * (2) if both names are equal, even if the the cases are different (i.e. upper case and lower case)
      * Note: This method is case-insensitive and order-insensitive
      * @param other
@@ -59,10 +59,10 @@ public class Name {
     		return false;
     	} 
     	
-    	ArrayList<String> thisNameSet = new ArrayList<String>(Arrays.asList(fullName.toUpperCase().split(" ")));
     	ArrayList<String> otherNameSet = new ArrayList<String>(Arrays.asList(other.toString().toUpperCase().split(" ")));
     	
-    	if(thisNameSet.containsAll(otherNameSet)){
+    	for(String s: otherNameSet)
+    	if(fullName.toUpperCase().contains(s)){
     		return true;
     	}
     	
